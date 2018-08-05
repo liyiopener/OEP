@@ -1,0 +1,147 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册页面</title>
+    <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+</head>
+<script type="text/javascript" th:inline="javascript">
+    $(document).ready(function () {
+        var contextPath = $('#contextPath').attr('href');
+        //验证昵称
+        $("#nickname").blur(function () {
+            var nickname = $("#nickname").val();
+            if (nickname === "")
+                $("#nickva").html("昵称不能为空");
+            //验证是否已被注册
+            else {
+                $.ajax({
+                    type: "post",
+                    url: "/Login/isNickNameExist",
+                    data: {
+                        nickname: nickname
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data)
+                        //alert("该昵称已注册");
+                            $("#nickva").html("该昵称已注册");
+                        else $("#nickva").empty();
+                    }
+                });
+            }
+        });
+        //验证邮箱格式
+        $("#email").blur(function () {
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            var email = $("#email").val();
+            if (email === "")
+                $("#emava").html("邮箱不能为空");
+            else if (!reg.test(email))
+                $("#emava").html("验证不通过");
+            //验证是否已被注册
+            else {
+                $.ajax({
+                    type: "get",
+                    url: "/Login/isEmailExist",
+                    data: "email=" + $("#email").val(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data)
+                            $("#emava").html("该邮箱已注册");
+                        else $("#emava").empty();
+                    }
+                });
+            }
+        });
+        $("#idencode").blur(function () {
+            $.ajax({
+                type: "get",
+                url: "/Login/testIdentCode",
+                data: "identcode=" + $("#idencode").val(),
+                dataType: "json",
+                success:function (data) {
+                    if(!data){
+                        $("#identva").html("验证码不正确");
+                    }
+                    else{
+                        $("#identva").empty();
+                    }
+                }
+            })
+        });
+        //验证密码一致
+        $('form').submit(function () {
+            var pw1 = $("#pwd1").val();
+            var pw2 = $("#pwd2").val();
+            if (pw1 === "" || pw2 === "") {
+                $("#pwdva").html("密码不能为空");
+                return false;
+            }
+            else if (pw1 != pw2) {
+                $("#pwdva").html("密码不一致")
+                return false;
+            }
+            else {
+                $("#pwdva").empty();
+                return true;
+            }
+
+        });
+    });
+
+    function sent_code() {
+        var email = $("#email").val();
+        $.ajax({
+                type: "get",
+                url: "/Login/sent_code",
+                data: "email=" + $("#email").val(),
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            }
+        );
+    }
+</script>
+<body>
+<form name="sign_up" method="post" th:action="@{/Login/sign_up}">
+    <table>
+        <tr>
+            <td><input id="nickname" name="nickname" placeholder="昵称">
+            </td>
+            <td id="nickva"></td>
+        </tr>
+        <tr>
+            <td>
+                <input name="role" type="radio" value="0" checked="checked">学生
+                <input name="role" type="radio" value="1">讲师
+            </td>
+        </tr>
+        <tr>
+            <td><input id="email" name="email" placeholder="邮箱">
+            </td>
+            <td><input type="button" value="发送验证码" onclick="sent_code()"></td>
+            <td id="emava"></td>
+        </tr>
+        <tr>
+            <td><input id="pwd1" name="passwd" type="password" placeholder="输入密码"></td>
+        </tr>
+        <tr>
+            <td><input id="pwd2" type="password" placeholder="确认密码"></td>
+            <td id="pwdva"></td>
+        </tr>
+        <tr>
+            <td><input id="idencode" placeholder="邮箱验证码"></td>
+            <td id="identva"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="注册"></td>
+            <td><input type="reset" value="重置"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

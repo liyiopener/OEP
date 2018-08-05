@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sut.oep.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.sut.oep.model.User" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="occupation" property="occupation" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, email, sex, company, occupation, nickname, passwd, create_time, role, img
+  </sql>
+  <select id="loginCheck" resultMap="BaseResultMap" parameterType="com.sut.oep.model.User">
+    select * from USER WHERE (nickname = #{nickname,jdbcType=VARCHAR} AND passwd = #{passwd,jdbcType=VARCHAR}) OR
+    (email = #{email} AND passwd = #{passwd})
+  </select>
+  <select id="selectByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select COUNT(*) FROM user WHERE email = #{eamil,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNickName" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) FROM USER WHERE nickname = #{nickname}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sut.oep.model.User" >
+    insert into user (uid, email, sex, 
+      company, occupation, nickname, 
+      passwd, create_time, role, 
+      img)
+    values (#{uid,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{company,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{role,jdbcType=INTEGER}, 
+      #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sut.oep.model.User" >
+    <selectKey keyProperty="uid" resultType="int">
+      select LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="occupation != null" >
+        occupation,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sut.oep.model.User" >
+    update user
+    <set >
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sut.oep.model.User" >
+    update user
+    set email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      company = #{company,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      role = #{role,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oep?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    druid:
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      filters: stat
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  mail:
+    host: smtp.163.com
+    username: yifreexu@163.com
+    password: wasd82465
+    default-encoding: utf-8
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  helper-dialect: mysql
+  params: count=countSql
+server:
+  port: 8081

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>目标页面</title>
+</head>
+<style>
+    .bdiv {
+        width: 15%;
+        float: left;
+    }
+
+    .title {
+        width: 75%;
+        padding-bottom: 20px;
+        padding-top: 45px;
+    }
+
+    .tat {
+        width: 33%;
+        text-align: center;
+        float: left;
+    }
+
+    .s40 {
+        width: 40%;
+        text-align: center;
+        float: left;
+
+    }
+
+    .s20 {
+        width: 20%;
+        text-align: center;
+        float: left;
+    }
+
+    .border {
+        width: 75%;
+        margin-top: 15px;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        float: left;
+    }
+
+    .left {
+        width: 30%;
+        float: left;
+        text-align: right;
+    }
+
+    .mid {
+        width: 45%;
+        float: left;
+    }
+
+    .right {
+        width: 10%;
+        float: left;
+        margin-right: 15%;
+    }
+
+    input {
+        text-align: center;
+        background-color: #d58512;
+    }
+
+    button {
+        margin: 0 auto;
+        width: 75%;
+        background-color: #d58512;
+    }
+    select {
+        width: 160px;
+        background-color: #d58512;
+    }
+
+    .row {
+        width: 100%;
+        float: left;
+        margin-top: 8px;
+    }
+
+    .rispan {
+        display: block;
+        float: right;
+    }
+
+    .mispan {
+        display: block;
+        text-align: center;
+    }
+
+    .mhr {
+        height: 3px;
+        border-top: 3px solid #8c8c8c;
+        border-right: 0px;
+        border-bottom: 0px;
+        border-left: 0px;
+        width: 80%;
+    }
+
+    .fhr {
+        height: 1px;
+        border-top: 1px solid #8c8c8c;
+        border-right: 0px;
+        border-bottom: 0px;
+        border-left: 0px;
+        width: 50%;
+        margin-top: 10%;
+    }
+
+</style>
+<body>
+<div style="width: 75%">
+    <!--按钮组-->
+    <div class="bdiv">
+        <button>查询</button>
+    </div>
+    <div class="bdiv">
+        <button>清空</button>
+    </div>
+    <div class="bdiv">
+        <button>提交</button>
+    </div>
+    <div class="bdiv">
+        <button>复核</button>
+    </div>
+    <div class="bdiv">
+        <button>删除</button>
+    </div>
+    <!--标题-->
+    <div class="title">
+        <span style="text-align: center;display: block">交易编号：New</span>
+    </div>
+    <!--表题-->
+    <div style="width: 75%;float: left">
+        <div class="tat">
+            市场
+            <select>
+                <option>USDLB</option>
+            </select>
+        </div>
+        <div class="tat">
+            计价日<input style="text-align: center" class="yel" value="2017-04-25">
+        </div>
+        <div class="tat">
+            重建 <input type="checkbox">
+        </div>
+    </div>
+    <!--表格-->
+    <div class="border">
+        <div class="row">
+            <div class="left">
+                <span>开始日</span><input value="2017-04-27">
+            </div>
+            <div class="mid">
+                <span class="rispan">滚动日</span>
+            </div>
+            <div class="right">
+                <input value="2017-04-27">
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span>结束日</span><input value="2017-04-27">
+            </div>
+            <div class="mid">
+                <input value="5Y" style="width: 15%">
+                <span class="rispan">工作日规则</span>
+            </div>
+            <div class="right">
+                <select>
+                    <option>MFL</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span>名义本金</span><input value="100,000,000,00">
+            </div>
+            <div class="mid">
+                <input value="USD" style="width: 15%;background-color: #8c8c8c">
+                <span class="rispan">支付台历</span>
+            </div>
+            <div class="right">
+                <select>
+                    <option>LON,NY</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span>提前终止日</span><input>
+            </div>
+            <div class="mid">
+                <span class="rispan">月末规则</span>
+            </div>
+            <div>
+                <select>
+                    <option>ISDA</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+        <div class="row" style="margin-bottom: 20px">
+            <div class="tat">
+                <span>交付</span>
+            </div>
+            <div class="tat">
+                <button style="width: 50%">交换</button>
+            </div>
+            <div class="tat">
+                <span>收取</span>
+            </div>
+        </div>
+        <hr class="mhr" align="center">
+        <div class="row">
+            <div class="s40">
+                <input value="3.1416">
+                <select>
+                    <option>USDLB_6M</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>固定利率/基准</span>
+            </div>
+            <div class="s40">
+                <input value="0.0000">
+                <select>
+                    <option>USDLB_3M</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s40">
+                <select>
+                    <option>Semi</option>
+                </select>
+                <select>
+                    <option>30/360</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>支付频率/计息规则</span>
+            </div>
+            <div class="s40">
+                <select>
+                    <option>Qtr</option>
+                </select>
+                <select>
+                    <option>ACT/360</option>
+                </select>
+            </div>
+        </div>
+        <hr class="fhr">
+        <div class="row">
+            <div class="s40">
+                <select>
+                    <option>Semi</option>
+                </select>
+                <select>
+                    <option>None</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>支付频率/复利</span>
+            </div>
+            <div class="s40">
+                <select>
+                    <option>Qtr</option>
+                </select>
+                <select>
+                    <option>None</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s40">
+                <select>
+                    <option>Yes</option>
+                </select>
+                <select>
+                    <option>Arr</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>支付频率/计息规则</span>
+            </div>
+            <div class="s40">
+                <select>
+                    <option>Yes</option>
+                </select>
+                <select>
+                    <option>Arr</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s40" style="text-align: left">
+                <select style="margin-left:8px">
+                    <option>Short</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>残断</span>
+            </div>
+            <div class="s40" style="text-align: left">
+                <select style="margin-left:8px">
+                    <option>Short</option>
+                </select>
+            </div>
+        </div>
+        <hr class="fhr">
+        <div class="row">
+            <div class="s40">
+                <select>
+                    <option>Semi</option>
+                </select>
+                <select>
+                    <option>MFL</option>
+                </select>
+            </div>
+            <div class="s20">
+                <span>重置假日/假日规则</span>
+            </div>
+            <div class="s40">
+                <select>
+                    <option>Adv</option>
+                </select>
+                <select>
+                    <option>UNADJ</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s40">
+                <select>
+                    <option>NY</option>
+                </select>
+                <input value="2">
+            </div>
+            <div class="s20">
+                <span>重置台历/延迟</span>
+            </div>
+            <div class="s40">
+                <select>
+                    <option>LON</option>
+                </select>
+                <input value="2">
+            </div>
+            <div class="row">
+                <div class="s40" style="text-align: left">
+                    <select style="margin-left:8px">
+                        <option>SimAvg</option>
+                    </select>
+                </div>
+                <div class="s20">
+                    <span>重置方法</span>
+                </div>
+                <div class="s40" style="text-align: left">
+                    <select style="margin-left:8px">
+                        <option>OneRate</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="tat">
+                    <a href="#">序列</a>
+                </div>
+                <div class="tat">
+                    <a href="#">单个款项</a>
+                </div>
+                <div class="tat">
+                    <a href="#">序列</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

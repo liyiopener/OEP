@@ -1,0 +1,54 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户首页</title>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div th:include="/comen/top"></div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-6">
+            <ul class="breadcrumb">
+                <li class="active" id="s1">
+                    个人资料
+                </li>
+                <li>
+                    <a href="#">动态</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="#">我的课程</a> <span class="divider">/</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-6">
+
+
+
+            <!--swithModular-->
+        </div>
+    </div>
+</div>
+
+
+<h1>主页</h1>
+<div>
+    <img th:src="@{/head/default.jpg}" height="200" width="200">
+</div>
+<ul>
+    <li><a th:href="@{/User/userInfo}">个人资料</a></li>
+    <li>
+        <a th:if="${session.role==0}" th:text="正在学习"></a>
+        <a th:if="${session.role==1}" th:text="我发布的"/>
+    </li>
+</ul>
+</body>
+</html>

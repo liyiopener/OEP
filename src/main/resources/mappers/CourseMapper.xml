@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.oep.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.sut.oep.model.Course">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="kid" jdbcType="INTEGER" property="kid" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="discri" jdbcType="VARCHAR" property="discri" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, kid, image, tid, cname, create_time
+  </sql>
+  <!--selectByCname-->
+  <select id="selectByCname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where cname = #{cname}
+  </select>
+  <!--selectCourseBykid-->
+  <select id="selectCourseBykid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where kid = #{kid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <!--selectCoursesByTeacher-->
+  <select id="selectCoursesByTeacher" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from course
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sut.oep.model.Course">
+    insert into course (cid, kid, image, 
+      tid, cname, create_time
+      )
+    values (#{cid,jdbcType=INTEGER}, #{kid,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sut.oep.model.Course">
+    <selectKey keyProperty="cid" resultType="int">
+      select LAST_INSERT_ID()
+    </selectKey>
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="kid != null">
+        kid,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="kid != null">
+        #{kid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sut.oep.model.Course">
+    update course
+    <set>
+      <if test="kid != null">
+        kid = #{kid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sut.oep.model.Course">
+    update course
+    set kid = #{kid,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      cname = #{cname,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

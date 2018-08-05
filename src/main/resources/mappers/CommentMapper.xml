@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sut.oep.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.sut.oep.model.Comment" >
+    <id column="commentid" property="commentid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="classid" property="classid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="INTEGER" />
+    <result column="replyuid" property="replyuid" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commentid, cid, classid, uid, time, floor, replyuid, content
+  </sql>
+  <!--selectByClassId-->
+  <!--selectByUid-->
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where classid = #{classid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sut.oep.model.Comment" >
+    insert into comment (commentid, cid, classid, 
+      uid, time, floor, replyuid, 
+      content)
+    values (#{commentid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}, #{replyuid,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sut.oep.model.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        commentid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="classid != null" >
+        classid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="replyuid != null" >
+        replyuid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="replyuid != null" >
+        #{replyuid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sut.oep.model.Comment" >
+    update comment
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="replyuid != null" >
+        replyuid = #{replyuid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sut.oep.model.Comment" >
+    update comment
+    set cid = #{cid,jdbcType=INTEGER},
+      classid = #{classid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      time = #{time,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=INTEGER},
+      replyuid = #{replyuid,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR}
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </update>
+</mapper>
